@@ -1,5 +1,5 @@
-const Register = (sequelize, DataTypes) => {
-  const register = sequelize.define('Registers', {
+const Registers = (sequelize, DataTypes) => {
+  const Register = sequelize.define('Registers', {
     id: {
       type: DataTypes.INTEGER, 
       primaryKey: true,
@@ -11,7 +11,7 @@ const Register = (sequelize, DataTypes) => {
   },
   { timestamps: false });
 
-  return register;
+  return Register;
 };
 
-module.exports = Register;
+module.exports = Registers;
