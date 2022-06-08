@@ -25,6 +25,30 @@ const getRegisters = async() => {
   }
 }
 
+// GET REGISTER BY ID
+const getRegisterById = async(id) => {
+  try {
+    const response = await axios.get(`${url}/register/${id}`);
+    
+    return response;
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+// EDIT REGISTER BY ID
+const updateRegisterById = async(id, name, birthDate) => {
+  try {
+    const response = await axios.put(`${url}/register/${id}`, {
+      name, birthDate
+    });
+
+    return response;
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
 // DELETE REGISTER BY ID
 const deleteRegisterById = async(id) => {
   try {
@@ -35,8 +59,12 @@ const deleteRegisterById = async(id) => {
   }
 }
 
+
+
 export {
   postRegister,
   getRegisters,
-  deleteRegisterById
+  getRegisterById,
+  deleteRegisterById,
+  updateRegisterById
 }

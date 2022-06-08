@@ -1,11 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { postRegister } from "../axios";
+import { getRegisterById, updateRegisterById } from "../axios";
+import Context from '../context';
 
-function Register() {
+function EditRegister() {
   const history = useNavigate();
+  const { id } = useContext(Context);
   const [name, setName] = useState('');
   const [date, setDate] = useState('');
+
+  const getRegister = async() => {
+    const register = await getRegisterById(id);
+    setName(register.data.name);
+    setDate(register.data.date);
+  }
 
   const handleOnChangeName = ({target: { value }}) => {
     setName(value);
@@ -16,22 +24,20 @@ function Register() {
   }
 
   const handleOnClick = async() => {
-    const register = await postRegister(name, date);
-    setName('');
-    setDate('');
-    console.log(register);
+    await updateRegisterById(id, name, date);
+    history('/list-register')
   }
 
-  const redirectListPage = () => {
-    history('/list-register');
-  }
+  useEffect(() => {
+    getRegister();
+  }, [])
 
   return(
     <main>
-      <h1>Novo cadastro</h1>
+      <h1>EDIT REGISTER</h1>
       <section>
         <label htmlFor="name">
-          Preencha com o nome:
+          Digite o nome:
           <input 
             id="name"
             type="text"
@@ -56,18 +62,11 @@ function Register() {
           type="submit"
           onClick={ handleOnClick }
         >
-          Cadastrar pessoa
-        </button>
-        <button
-          type="button"
-          onClick={ redirectListPage }
-        >
-          Lista de pessoas cadastradas
+          Editar cadastro
         </button>
       </section>
     </main>
-    
   )
 }
 
-export default Register;
+export default EditRegister;

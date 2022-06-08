@@ -1,7 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { deleteRegisterById, getRegisters } from "../axios";
+import Context from '../context';
 
 function ListRegister() {
+  const history = useNavigate();
+  const { setId } = useContext(Context)
   const [list, setList] = useState([]);
 
   const getRegistersList = async () => {
@@ -12,6 +16,11 @@ function ListRegister() {
   const handleOnCLickDelete = async ({ target: { id }}) => {
     await deleteRegisterById(id);
     await getRegistersList();
+  }
+
+  const handleOnClickEdit = ({ target: { id } }) => {
+    setId(id);
+    history('/edit-register');
   }
 
   useEffect(() => {
@@ -35,7 +44,7 @@ function ListRegister() {
               </tr>
             </thead>
             <tbody>
-              { list.map(({ id, name, birthDate, age }, index) => { 
+              { list.map(({ id, name, birthDate, age }) => { 
                 return (
                   <tr key={id}>
                     <td>{name}</td>
@@ -49,12 +58,12 @@ function ListRegister() {
                     </button>
                     <button
                       id={id}
+                      onClick={ handleOnClickEdit }
                     >
                       Editar cadastro
                     </button>
                   </tr>
-                  
-            )})}
+              )})}
             </tbody>
           </table>
         </section>
