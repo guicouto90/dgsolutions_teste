@@ -2,6 +2,12 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { deleteRegisterById, getRegisters } from "../axios";
 import Context from '../context';
+import Button from '@mui/material/Button';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 
 function ListRegister() {
   const history = useNavigate();
@@ -32,42 +38,59 @@ function ListRegister() {
   }, [list]);
 
   return(
-    <main>
+    <React.Fragment>
       <h1>Lista de cadastro</h1>
-      <section>
-          <table>
-            <thead>
-              <tr>
-              <th>Nome </th>
-              <th>Data de Nascimento </th>
-              <th>Idade </th>
-              </tr>
-            </thead>
-            <tbody>
-              { list.map(({ id, name, birthDate, age }) => { 
-                return (
-                  <tr key={id}>
-                    <td>{name}</td>
-                    <td>{new Date(birthDate).toLocaleDateString('pt-BR')}</td>
-                    <td>{age}</td>
-                    <button
-                      id={id}
-                      onClick={ handleOnCLickDelete }
-                    >
-                      Deletar cadastro
-                    </button>
-                    <button
-                      id={id}
-                      onClick={ handleOnClickEdit }
-                    >
-                      Editar cadastro
-                    </button>
-                  </tr>
-              )})}
-            </tbody>
-          </table>
-        </section>
-    </main>
+      <Table size="small">
+        <TableHead>
+          <TableRow>
+            <TableCell>Nome</TableCell>
+            <TableCell>Data de nascimento</TableCell>
+            <TableCell>Idade</TableCell>
+            <TableCell>Deletar</TableCell>
+            <TableCell>Editar</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {list.map(({ id, name, birthDate, age }) => (
+            <TableRow key={id}>
+              <TableCell>{name}</TableCell>
+              <TableCell>{new Date(birthDate).toLocaleDateString('pt-BR')}</TableCell>
+              <TableCell>{age}</TableCell>
+              <TableCell>
+                <Button
+                  id={id}
+                  variant="contained"
+                  color="error"
+                  sx={{ mt: 0, mb: 1 }}
+                  onClick={ handleOnCLickDelete }
+                >
+                  Deletar cadastro
+                </Button>
+              </TableCell>
+              <TableCell>
+                <Button
+                  id={id}
+                  variant="contained"
+                  color="info"
+                  sx={{ mt: 0, mb: 1}}
+                  onClick={ handleOnClickEdit }
+                >
+                  Editar cadastro
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+      <Button
+        variant="contained"
+        color="success"
+        sx={{ mt: 3, mb: 1}}
+        onClick={ () => history('/register') }
+      >
+        Pagina para novo cadastro
+      </Button>
+    </React.Fragment>
   )
 }
 

@@ -2,8 +2,17 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getRegisterById, updateRegisterById } from "../axios";
 import Context from '../context';
+import Button from '@mui/material/Button';
+import CssBaseline from '@mui/material/CssBaseline';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 function EditRegister() {
+  const theme = createTheme();
   const history = useNavigate();
   const { id } = useContext(Context);
   const [name, setName] = useState('');
@@ -33,40 +42,61 @@ function EditRegister() {
   }, [])
 
   return(
-    <main>
-      <h1>EDIT REGISTER</h1>
-      <section>
-        <label htmlFor="name">
-          Digite o nome:
-          <input 
-            id="name"
-            type="text"
-            name="name"
-            value={name}
-            onChange={ handleOnChangeName }
-          />
-        </label>
-        <label htmlFor="date">
-          Preencha com a data de nascimento
-          <input 
-            id="date"
-            type="date"
-            name="date"
-            value={date}
-            onChange={ handleOnChangeDate }
-          />
-        </label>
-      </section>
-      <section>
-        <button
-          type="submit"
-          onClick={ handleOnClick }
-        >
-          Editar cadastro
-        </button>
-      </section>
-    </main>
-  )
-}
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <Box
+        sx={{
+        marginTop: 8,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        }}
+      >
+        <Typography component="h1" variant="h3">
+          Editar Cadastro
+        </Typography>
+        <Box component="form" noValidate sx={{ mt: 3 }}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              Nome Completo:
+              <TextField
+                autoComplete="name"
+                name="name"
+                required
+                fullWidth
+                id="name"
+                label="Nome Completo"
+                autoFocus
+                value={name}
+                onChange={ handleOnChangeName }
+              />
+            </Grid>
+            <Grid item xs={12} sm={6}>
+              Data de nascimento:
+              <TextField
+                required
+                fullWidth
+                id="date"
+                name="date"
+                autoComplete="family-name"
+                type="date"
+                onChange={ handleOnChangeDate }
+              />
+            </Grid>
+          </Grid>
+          <Button
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+            onClick={ handleOnClick }
+          >
+            Editar cadastro
+          </Button>
+        </Box>
+      </Box>
+    </Container>
+  </ThemeProvider>
+)}
 
 export default EditRegister;
