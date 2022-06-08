@@ -28,7 +28,6 @@ const getRegisters = async() => {
 // GET REGISTER BY ID
 const getRegisterById = async(id) => {
   try {
-    console.log(`ID: ${id}`)
     const response = await axios.get(`${url}/register/${id}`);
     
     return response;
@@ -53,7 +52,6 @@ const updateRegisterById = async(id, name, birthDate) => {
 // DELETE REGISTER BY ID
 const deleteRegisterById = async(id) => {
   try {
-    console.log(`ID: ${id}`)
     const response = await axios.delete(`${url}/register/${id}`);
     return response;
   } catch (error) {

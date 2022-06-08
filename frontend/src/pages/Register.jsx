@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { postRegister } from "../axios";
 import Button from '@mui/material/Button';
@@ -15,6 +15,15 @@ function Register() {
   const history = useNavigate();
   const [name, setName] = useState('');
   const [date, setDate] = useState('');
+  const [disable, setDisable] = useState(true);
+
+  const enableButton = () => {
+    if(name.length >= 3 && date.length >= 10) {
+      setDisable(false);
+    } else {
+      setDisable(true);
+    }
+  }
 
   const handleOnChangeName = ({target: { value }}) => {
     setName(value);
@@ -33,6 +42,10 @@ function Register() {
   const redirectListPage = () => {
     history('/list-register');
   }
+
+  useEffect(() => {
+    enableButton();
+  }, [name, date]);
 
   return(
     <ThemeProvider theme={theme}>
@@ -78,11 +91,13 @@ function Register() {
                 />
               </Grid>
             </Grid>
+            <span>* Preencha os dois campos para habilitar o botão</span>
             <Button
               fullWidth
+              disabled={disable}
               color="success"
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 1, mb: 2 }}
               onClick={ handleOnClick }
             >
               Cadastrar pessoa

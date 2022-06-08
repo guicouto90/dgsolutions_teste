@@ -15,13 +15,21 @@ function EditRegister() {
   const theme = createTheme();
   const history = useNavigate();
   const { id } = useContext(Context);
+  const [disable, setDisable] = useState(true);
   const [name, setName] = useState('');
   const [date, setDate] = useState('');
 
   const getRegister = async() => {
     const register = await getRegisterById(id);
     setName(register.data.name);
-    setDate(register.data.date);
+  }
+
+  const enableButton = () => {
+    if(name.length >= 3 && date.length >= 10) {
+      setDisable(false);
+    } else {
+      setDisable(true); 
+    }
   }
 
   const handleOnChangeName = ({target: { value }}) => {
@@ -40,6 +48,10 @@ function EditRegister() {
   useEffect(() => {
     getRegister();
   }, [])
+
+ useEffect(() => {
+    enableButton();
+  }, [name, date]);
 
   return(
     <ThemeProvider theme={theme}>
@@ -85,10 +97,12 @@ function EditRegister() {
               />
             </Grid>
           </Grid>
+          <span>* Preencha os dois campos para habilitar o botão</span>
           <Button
             fullWidth
+            disabled={disable}
             variant="contained"
-            sx={{ mt: 3, mb: 2 }}
+            sx={{ mt: 1, mb: 2 }}
             onClick={ handleOnClick }
           >
             Editar cadastro
