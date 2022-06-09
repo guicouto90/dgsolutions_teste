@@ -45,8 +45,6 @@ function ListRegister() {
   useEffect(() => {
   }, [list]);
 
-  if(list.length == 0) return <h1>Carregando página...</h1>
-
   return(
     <React.Fragment>
       <h1>Lista de cadastro</h1>
