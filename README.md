@@ -10,7 +10,7 @@ Esse repositório se trata do teste técnico para empresa [DG Solutions](https:/
 
 ## Descrição
 O projeto está separado em duas pastas, backend e frontend.
-O projeto se refere, a um cadastro de pessoas, onde se inputa o nome e a data de nascimento.
+O projeto se refere, a cadastro de pessoas, onde se inputa o nome e a data de nascimento.
 É possível listar todas as pessoas cadastradas, retornando os dados inputados e também a idade atual dela.
 Também é possivel deletar e editar os cadastros.
 
@@ -72,7 +72,7 @@ Também é possivel deletar e editar os cadastros.
 - Implementação do JWT;
 - "Dockerizar" a aplicação;
 
-## Instruções de do Frontend localmente:
+## Instruções de uso para o Frontend localmente:
 - Clone o repositório em sua máquina;
 - Acesse a pasta `/frontend`;
 - Instale as dependencias com o comando `npm install`;
@@ -85,8 +85,6 @@ Também é possivel deletar e editar os cadastros.
   - `/edit-register`, onde é possível editar um registro selecionado.
 
 ### Considerações finais:
-<div align="center">
   Dúvidas ou sugestões me contate por:
   - Linkedin: https://www.linkedin.com/in/guicouto90/
   - Email: gui.couto90@yahoo.com.br
-</div>
