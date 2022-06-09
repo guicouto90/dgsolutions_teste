@@ -94,6 +94,7 @@ function Register() {
             <span>* Preencha os dois campos para habilitar o botão</span>
             <Button
               fullWidth
+              type="submit"
               disabled={disable}
               color="success"
               variant="contained"

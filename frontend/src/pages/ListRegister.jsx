@@ -19,6 +19,15 @@ function ListRegister() {
     setList(registers.data);
   }
 
+  const formatBirthDate = (birthDate) => {
+    const dateArray = birthDate.split('-');
+    const year = dateArray[0];
+    const month = dateArray[1];
+    const day = dateArray[2].split('T')[0];
+
+    return `${day}/${month}/${year}`;
+  }
+
   const handleOnCLickDelete = async ({ target: { id }}) => {
     await deleteRegisterById(id);
     await getRegistersList();
@@ -54,7 +63,7 @@ function ListRegister() {
           {list.map(({ id, name, birthDate, age }) => (
             <TableRow key={id}>
               <TableCell>{name}</TableCell>
-              <TableCell>{new Date(birthDate).toLocaleDateString('pt-BR')}</TableCell>
+              <TableCell>{formatBirthDate(birthDate)}</TableCell>
               <TableCell>{age}</TableCell>
               <TableCell>
                 <Button
