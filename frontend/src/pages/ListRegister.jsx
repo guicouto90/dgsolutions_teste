@@ -40,11 +40,12 @@ function ListRegister() {
 
   useEffect(() => {
     getRegistersList();
-    console.log(list);
   }, [])
 
   useEffect(() => {
   }, [list]);
+
+  if(list.length == 0) return <h1>Carregando página...</h1>
 
   return(
     <React.Fragment>

@@ -36,6 +36,8 @@ Também é possivel deletar e editar os cadastros.
 - Em seguida utilize o comando `npx sequelize db:migrate` para migrar as configurações do arquivos na pasta `/backend/migrations` para o banco de dados;
 - Utilize o comando `npm start` para iniciar a aplicação;
 - Aplicação utilizará a porta `3001` do localhost.
+- Para rodar os testes de integração utilize o comando `npm test`, com aplicação rodando;
+- Os testes "dropa" o banco de dados e cria um novo;
 - É necessário o serviço do MySQL funcionando em sua máquina para rodar localmente.
 - API possui as seguintes rotas:
     - POST, GET: `/register`
@@ -65,13 +67,6 @@ Também é possivel deletar e editar os cadastros.
     }
 ```
 
-### Próximos passos na API:
-- Aprimoramento nos teste,
-- Mais testes;
-- Uma rota para login;
-- Implementação do JWT;
-- "Dockerizar" a aplicação;
-
 ## Instruções de uso para o Frontend localmente:
 - Clone o repositório em sua máquina;
 - Acesse a pasta `/frontend`;
@@ -83,6 +78,14 @@ Também é possivel deletar e editar os cadastros.
   - `/register`, onde é possível cadastrar novos registros;
   - `/list-register`, onde listará todos os registros cadastrados;
   - `/edit-register`, onde é possível editar um registro selecionado.
+
+## Próximos passos no projeto:
+- Aprimoramento nos teste,
+- Mais testes;
+- Testes no frontend;
+- Uma rota para login;
+- Implementação do JWT no backend;
+- "Dockerizar" a aplicação.
 
 ### Considerações finais:
   Dúvidas ou sugestões me contate por:
